@@ -1,0 +1,66 @@
+//This code will cause an LED connected to GPIO D7 to blink the word nigel in morse code.
+
+
+//GPIO pin
+int ledPin = D7;
+
+
+void setup() {
+    pinMode(ledPin, OUTPUT); // set D7 to output
+    
+    //subscribes to the event to listen and calls TestInput function when recieved
+    Particle.subscribe("Deakin_RIOT_SIT210_Photon_Buddy", TestInput); 
+}
+// This function checks the data contents for the subscribed event and does something depending on what the data is
+void TestInput(const char *event, const char *data)
+{
+    if (strcmp(data,"wave") == 0)
+    {
+        FlashThree();
+    }
+    else if(strcmp(data,"pat") == 0)
+    {
+        FlashFast();
+    }
+
+}
+
+void FlashThree() // flash 3 times
+{
+    digitalWrite(ledPin, HIGH);
+    delay(500);
+    digitalWrite(ledPin, LOW);
+    delay(500);
+    
+    digitalWrite(ledPin, HIGH);
+    delay(500);
+    digitalWrite(ledPin, LOW);
+    delay(500);
+    
+    digitalWrite(ledPin, HIGH);
+    delay(500);
+    digitalWrite(ledPin, LOW);
+    delay(500);
+}
+
+void FlashFast() // flash 3 times fast
+{
+    digitalWrite(ledPin, HIGH);
+    delay(100);
+    digitalWrite(ledPin, LOW);
+    delay(100);
+    
+    digitalWrite(ledPin, HIGH);
+    delay(100);
+    digitalWrite(ledPin, LOW);
+    delay(100);
+    
+    digitalWrite(ledPin, HIGH);
+    delay(100);
+    digitalWrite(ledPin, LOW);
+    delay(100);
+}
+
+void loop() {
+}
+
